@@ -1,0 +1,171 @@
+/// Variables
+
+$Soft-blue: hsl(215, 51%, 70%);
+$Cyan: hsl(178, 100%, 50%);
+$Very-dark-blue-main: hsl(217, 54%, 11%);
+$Very-dark-blue-card: hsl(216, 50%, 16%);
+$Very-dark-blue-line: hsl(215, 32%, 27%);
+$White: hsl(0, 0%, 100%);
+
+//////////////////////////////////////////////////////////////
+///Responsive function
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/// Resets
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+
+  @include respond(phone) {
+    // width < 600?
+    font-size: 37.5%; //1 rem = 6px, 6/16 = 37.5%
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/// Typography
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("/src/fonts/IRANSansWeb.ttf");
+}
+@font-face {
+  font-family: "IRANSansWeb(FaNum)";
+  src: url("/src/fonts/IRANSansWeb\(FaNum\).ttf");
+}
+
+body {
+  font-family: "iran-sans", sans-serif;
+  background-color: $Very-dark-blue-main;
+  color: $Soft-blue;
+  text-decoration: none;
+}
+
+//////////main styles
+.container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@mixin card {
+  max-width: 35rem;
+  padding: 2.5rem;
+  border-radius: 1.3rem;
+  background-color: $Very-dark-blue-card;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 3rem;
+  transition: all 0.3s;
+  box-shadow: 0 10px 20px rgba($Very-dark-blue-main, 0.4);
+  box-shadow: 0 20px 40px rgba($Very-dark-blue-main, 0.3);
+  box-shadow: 0 40px 80px rgba($Very-dark-blue-main, 0.2);
+}
+@mixin h1 {
+  font-size: 2.4rem;
+  line-height: 3.5rem;
+  color: $White;
+}
+@mixin paragraph {
+  font-size: 1.6rem;
+  line-height: 3rem;
+  color: $Soft-blue;
+}
+
+@mixin faNum {
+  font-family: "IRANSansWeb(FaNum)";
+}
+
+.fa-num {
+  @include faNum();
+}
+
+.color-white {
+  color: $White;
+}
+
+.card {
+  @include card();
+
+  img {
+    width: 100%;
+    border-radius: 1.3rem;
+  }
+
+  .caption {
+    width: 100%;
+    h5 {
+      @include h1();
+      margin-bottom: 1rem;
+    }
+    .caption {
+      @include paragraph();
+      margin-bottom: 3rem;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .info-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.6rem;
+
+        .icon-ethereum {
+          width: 1.4rem;
+        }
+
+        .icon-clock {
+          width: 1.8rem;
+        }
+
+        .price {
+          color: $Cyan;
+        }
+      }
+    }
+    .seperator {
+      display: block;
+      background-color: rgba($Soft-blue, 0.3);
+      width: 100%;
+      height: 0.5px;
+      margin: 3rem 0;
+    }
+    .user {
+      display: flex;
+      align-items: center;
+      @include paragraph();
+
+      .user-image {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 100%;
+        border: 1px solid $White;
+        margin-left: 1rem;
+      }
+    }
+  }
+}
